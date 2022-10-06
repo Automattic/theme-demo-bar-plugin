@@ -8,7 +8,7 @@ This plugin adds the demo bar on atomic theme demo site.
 
 This section describes how to install the plugin and get it working.
 
-1. Download this repository.
+1. Download this repository [clicking here](https://github.com/Automattic/theme-demo-bar-plugin/archive/refs/heads/trunk.zip).
 2. Upload the ZIP file to your demo site.
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
