@@ -13,3 +13,4 @@ This section describes how to install the plugin and get it working.
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
 ### Screenshots
+<img width="1511" alt="Screen Shot 2022-10-06 at 14 36 12" src="https://user-images.githubusercontent.com/1234758/194381112-b6b62bff-fc97-4356-a234-c0bfb733158a.png">
