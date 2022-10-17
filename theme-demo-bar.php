@@ -61,14 +61,16 @@ class Theme_Demo_Sites_Display {
 			return $this->premium_theme_data;
 		}
 
-		$transient_key     = "atomic-premium-theme-data:$stylesheet";
+		$country_code = $_SERVER['GEOIP_COUNTRY_CODE'] ?? 'US';
+
+		$transient_key     = "atomic-premium-theme-data:$country_code:$stylesheet";
 		$cached_theme_data = get_transient( $transient_key );
 		if ( is_object( $cached_theme_data ) ) {
 			return $cached_theme_data;
 		}
 
 		$response = Automattic\Jetpack\Connection\Client::wpcom_json_api_request_as_blog(
-			"themes/{$stylesheet}/premium-details",
+			"themes/{$stylesheet}/premium-details?country_code={$country_code}",
 			'2',
 			array(
 				'method' => 'GET',
