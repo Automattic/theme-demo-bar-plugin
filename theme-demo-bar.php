@@ -360,20 +360,20 @@ class Theme_Demo_Sites_Display {
  *
  * @return bool
  */
-function wpcomsh_is_theme_demo_site() {
+function is_theme_demo_site() {
 	return wpcomsh_is_site_sticker_active( 'theme-demo-site' );
 }
 
 /**
  * Instantiate only for known theme demo sites and block patterns source sites
  *
- * @uses wpcomsh_is_theme_demo_site
+ * @uses is_theme_demo_site
  * @uses Theme_Demo_Sites_Display::instance
  * @return void
  */
-function wpcomsh_theme_demo_sites_display() {
-	if ( wpcomsh_is_theme_demo_site() ) {
+function theme_demo_sites_display() {
+	if ( is_theme_demo_site() ) {
 		Theme_Demo_Sites_Display::instance();
 	}
 }
-add_action( 'init', 'wpcomsh_theme_demo_sites_display' );
+add_action( 'init', 'theme_demo_sites_display' );
