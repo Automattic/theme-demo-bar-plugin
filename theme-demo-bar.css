@@ -54,7 +54,8 @@
 	width: 100%;
 	z-index: 999999;
 }
-body.logged-in .demosite-activate {
+body.logged-in .demosite-activate, 
+body.admin-bar .demosite-activate {
 	top: 32px !important;
 }
 /*
