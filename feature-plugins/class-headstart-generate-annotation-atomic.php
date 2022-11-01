@@ -131,6 +131,10 @@ class Headstart_Generate_Annotation_Atomic {
 	}
 
 	private static function build_woocommerce_product_data() {
+		if ( ! class_exists( 'WC_Product_Data_Store_CPT' ) ) {
+			return array();
+		}
+
 		$headstart_product_meta = array();
 
 		$woo_product_data_store = new WC_Product_Data_Store_CPT();
