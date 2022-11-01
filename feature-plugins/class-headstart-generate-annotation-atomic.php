@@ -1,7 +1,5 @@
 <?php
 
-error_log('Headstart_Generate_Annotation_Atomic: Begin load');
-
 class Headstart_Generate_Annotation_Atomic {
 	public static function generate_theme_annotation() {
 		$type                 = 'copy';

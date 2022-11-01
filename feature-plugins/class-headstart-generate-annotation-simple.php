@@ -1,5 +1,4 @@
 <?php
-error_log('Headstart_Generate_Annotation_Simple: Begin load');
 /**
  * Headstart_Annotation_Generator_Simple: Companion to Headstart_Annotation_Generator.
  *
