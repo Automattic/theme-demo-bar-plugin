@@ -5,7 +5,7 @@ class Headstart_Generate_Annotation_Atomic {
 		$type                 = 'copy';
 		$options              = self::get_site_options();
 		$widgets              = array();
-		$template_for_post_id = array();
+		$template_for_post_id = self::get_template_for_post_id();
 		$posts_required       = 1;
 		$excluded_post_types  = array();
 
@@ -37,6 +37,20 @@ class Headstart_Generate_Annotation_Atomic {
 		$anno['content'] = array_values( $anno['content'] );
 
 		return $anno;
+	}
+
+	private static function get_template_for_post_id() {
+		$template_for_post_id = array();
+
+		$all_post_ids = get_posts( array( 'fields' => 'ids', 'nopaging' => true, 'post_type' => 'any' ) );
+		foreach ( $all_post_ids as $post_id ) {
+			$template = get_post_meta( $post_id, '_wp_page_template', true );
+			if ( empty( $template) || $template === 'default' ) {
+				continue;
+			}
+			$template_for_post_id[$post_id] = $template;
+		}
+		return $template_for_post_id;
 	}
 
 	private static function get_site_options() {
