@@ -143,8 +143,27 @@ class Headstart_Generate_Annotation_Atomic {
 		);
 		$product_posts            = get_posts( $published_product_filter );
 
+		// Post meta keys that we have decided not to include in headstart annotations.
+		$skip_these_meta_keys = array(
+			'_edit_last',
+			'_edit_lock',
+			'_thumbnail_id',
+		);
+
 		foreach ( $product_posts as $product_post ) {
 			$post_meta = get_post_meta( $product_post->ID );
+
+			// If a post_meta key has only one value, remove the array from it.
+			// Example: '_hs_old_id' => [ 78 ] becomes '_hs_old_id' => 78.
+			foreach ( $post_meta as $post_meta_key => $post_meta_value ) {
+				if ( is_array( $post_meta_value ) && count( $post_meta_value ) == 1 ) {
+					$post_meta[$post_meta_key] = $post_meta_value[0];
+				}
+			}
+
+			// Remove the list of "skippable" keys.
+			$post_meta = array_diff_key( $post_meta, array_flip( $skip_these_meta_keys ) );
+
 			if ( ! empty( $post_meta ) && is_array( $post_meta ) ) {
 				// Extract all specified Woo meta keys
 				// We may want to avoid any empty keys, in which case we could use ARRAY_FILTER_USE_BOTH
