@@ -18,6 +18,15 @@ class Headstart_Generate_Annotation_Atomic {
 		$anno['custom_term_meta']         = self::build_custom_term_meta( $custom_term_ids );
 		$anno['custom_term_assignments']  = self::build_product_term_assignments();
 
+		// This needs to be transformed and added to a new "hs_post_meta" key
+		// for each post in "content".
+		// HOWEVER, first, I need to find out why the Atomic content is of shape
+		// "content": { "37": { }, "38": { }, ... }
+		// But the Simple content is of shape
+		// "content": [ {...}, {...}, ... ]
+		// Even though the f/class-headstart-generate-annotation-simple.php is copy pasted and is the exact same across the two.
+		$anno['testme'] = self::build_woocommerce_product_data_99();
+
 		return $anno;
 	}
 
@@ -167,6 +176,38 @@ class Headstart_Generate_Annotation_Atomic {
 			}
 		}
 		return $assignments;
+	}
+
+	//////////////////
+	private static function build_woocommerce_product_data_99() {
+		$headstart_product_meta = array();
+
+		$woo_product_data_store = new WC_Product_Data_Store_CPT();
+		$woo_product_meta_keys  = $woo_product_data_store->get_internal_meta_keys();
+
+		$published_product_filter = array(
+			'nopaging'    => true,
+			'post_status' => 'publish',
+			'post_type'   => array( 'product' ),
+		);
+		$product_posts            = get_posts( $published_product_filter );
+
+		foreach ( $product_posts as $product_post ) {
+			$post_meta = get_post_meta( $product_post->ID );
+			if ( ! empty( $post_meta ) && is_array( $post_meta ) ) {
+				// Extract all specified Woo meta keys
+				// We may want to avoid any empty keys, in which case we could use ARRAY_FILTER_USE_BOTH
+				$headstart_product_meta[ $product_post->ID ] = array_filter(
+					$post_meta,
+					function ( $meta_key ) use ( $woo_product_meta_keys ) {
+						return in_array( $meta_key, $woo_product_meta_keys, true );
+					},
+					ARRAY_FILTER_USE_KEY
+				);
+			}
+		}
+
+		return $headstart_product_meta;
 	}
 }
 
