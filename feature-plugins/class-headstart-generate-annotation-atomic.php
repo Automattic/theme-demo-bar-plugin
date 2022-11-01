@@ -13,63 +13,12 @@ class Headstart_Generate_Annotation_Atomic {
 
 		$anno = Headstart_Annotation_Generator_Simple::generate_theme_annotation( $type, $options, $widgets, $template_for_post_id, $posts_required, $excluded_post_types );
 
-		//$anno['woocommerce_product_data'] = self::build_woocommerce_product_data_2();
-		/*
 		$anno['custom_terms_by_taxonomy'] = self::build_custom_terms();
-		$custom_term_ids = self::get_custom_term_ids( $anno['custom_terms_by_taxonomy'] );
-		$anno['custom_term_meta'] = self::build_custom_term_meta( $custom_term_ids );
+		$custom_term_ids                  = self::get_custom_term_ids( $anno['custom_terms_by_taxonomy'] );
+		$anno['custom_term_meta']         = self::build_custom_term_meta( $custom_term_ids );
+		$anno['custom_term_assignments']  = self::build_product_term_assignments();
 
-		 */
 		return $anno;
-	}
-
-	private static function get_custom_term_ids( $custom_terms_by_taxonomy ) {
-		$all_ids = array();
-		foreach ( $custom_terms_by_taxonomy as $taxon => $terms ) {
-			$these_ids = array_map( function( $v ) {
-				return $v->term_id;
-			}, $terms );
-			$all_ids = array_merge( $all_ids, $these_ids );
-		}
-		return $all_ids;
-	}
-
-	private static function build_custom_term_meta( $custom_term_ids ) {
-		$result = array();
-		foreach ( $custom_term_ids as $id ) {
-			$meta = get_term_meta( $id );
-			if ( ! empty( $meta ) ) {
-				$result[ $id ] = $meta;
-			}
-		}
-		return $result;
-	}
-
-	private static function build_custom_terms() {
-		$taxons = get_taxonomies();
-		$taxons = array_diff( $taxons, self::get_default_taxonomies() );
-
-		$custom_terms = array();
-		foreach ( $taxons as $taxon ) {
-			$terms = get_terms( $taxon, array( 'hide_empty' => false ) );
-			if ( ! empty( $terms ) ) {
-				$custom_terms[$taxon] = $terms;
-			}
-		}
-		return $custom_terms;
-	}
-
-	private static function get_default_taxonomies() {
-		return array(
-			'category',
-			'post_tag',
-			'nav_menu',
-			'link_category',
-			'post_format',
-			'wp_theme',
-			'wp_template_part_area',
-			'mentions',
-		);
 	}
 
 	private static function build_woocommerce_product_data_2() {
@@ -140,6 +89,84 @@ class Headstart_Generate_Annotation_Atomic {
 		$site_options['jetpack_global_styles'] = get_option( 'jetpack_global_styles' );
 
 		return $site_options;
+	}
+
+	///////// WORKING BELOW //////
+
+	private static function build_custom_terms() {
+		$taxons = get_taxonomies();
+		$taxons = array_diff( $taxons, self::get_default_taxonomies() );
+
+		$custom_terms = array();
+		foreach ( $taxons as $taxon ) {
+			$terms = get_terms( $taxon, array( 'hide_empty' => false ) );
+			if ( ! empty( $terms ) ) {
+				$custom_terms[$taxon] = $terms;
+			}
+		}
+		return $custom_terms;
+	}
+
+	private static function get_default_taxonomies() {
+		return array(
+			'category',
+			'post_tag',
+			'nav_menu',
+			'link_category',
+			'post_format',
+			'wp_theme',
+			'wp_template_part_area',
+			'mentions',
+		);
+	}
+
+	private static function get_custom_term_ids( $custom_terms_by_taxonomy ) {
+		$all_ids = array();
+		foreach ( $custom_terms_by_taxonomy as $taxon => $terms ) {
+			$these_ids = array_map( function( $v ) {
+				return $v->term_id;
+			}, $terms );
+			$all_ids = array_merge( $all_ids, $these_ids );
+		}
+		return $all_ids;
+	}
+
+	private static function build_custom_term_meta( $custom_term_ids ) {
+		$result = array();
+		foreach ( $custom_term_ids as $id ) {
+			$meta = get_term_meta( $id );
+			if ( ! empty( $meta ) ) {
+				$result[ $id ] = $meta;
+			}
+		}
+		return $result;
+	}
+
+	private static function build_product_term_assignments( ) {
+		$assignments = array();
+
+		$published_product_filter = array(
+			'nopaging'    => true,
+			'post_status' => 'publish',
+			'post_type'   => array( 'product' ),
+		);
+		$product_posts = get_posts( $published_product_filter );
+		foreach ( $product_posts as $post ) {
+			$assignments[ $post->ID ] = array();
+
+			$taxes = get_object_taxonomies( $post->post_type );
+			foreach ( $taxes as $tax ) {
+				$names = wp_get_object_terms( $post->ID, $tax, array( 'fields' => 'names' ) );
+				if ( ! empty( $names ) ) {
+					$assignments[$post->ID][$tax] = $names;
+				}
+			}
+
+			if ( empty( $assignments[ $post->ID ] ) ) {
+				unset( $assignments[ $post->ID ] );
+			}
+		}
+		return $assignments;
 	}
 }
 
