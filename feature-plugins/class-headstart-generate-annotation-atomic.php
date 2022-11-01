@@ -31,6 +31,7 @@ class Headstart_Generate_Annotation_Atomic {
 			} else {
 				$anno['content'][$post_id]['hs_post_meta'] = array_merge( $anno['content'][$post_id]['hs_post_meta'], $product_data[$post_id] );
 			}
+			ksort( $anno['content'][$post_id]['hs_post_meta'] );
 		}
 
 		// Re-index the `posts` array.
