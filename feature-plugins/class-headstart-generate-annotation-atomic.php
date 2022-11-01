@@ -13,17 +13,17 @@ class Headstart_Generate_Annotation_Atomic {
 
 		$anno = Headstart_Annotation_Generator_Simple::generate_theme_annotation( $type, $options, $widgets, $template_for_post_id, $posts_required, $excluded_post_types );
 
-
 		// Add Terms, Term Meta, and Term Assignments.
 		$anno['custom_terms_by_taxonomy'] = self::build_custom_terms();
 		$custom_term_ids                  = self::get_custom_term_ids( $anno['custom_terms_by_taxonomy'] );
 		$anno['custom_term_meta']         = self::build_custom_term_meta( $custom_term_ids );
 		$anno['custom_term_assignments']  = self::build_product_term_assignments();
 
+		// Fetch post_meta data on product posts.
 		$product_data = self::build_woocommerce_product_data();
-		// This needs to be transformed and added to a new "hs_post_meta" key
-		// for each post in "content".
 
+		// The data needs to be transformed by adding it or merging it to the
+		// "hs_post_meta" key for each post in "content".
 		foreach ( array_keys( $anno['content'] ) as $post_id ) {
 			if ( empty( $product_data[$post_id] ) ) {
 				continue;
@@ -55,8 +55,6 @@ class Headstart_Generate_Annotation_Atomic {
 
 		return $site_options;
 	}
-
-	///////// WORKING BELOW //////
 
 	private static function build_custom_terms() {
 		$taxons = get_taxonomies();
@@ -134,7 +132,6 @@ class Headstart_Generate_Annotation_Atomic {
 		return $assignments;
 	}
 
-	//////////////////
 	private static function build_woocommerce_product_data() {
 		$headstart_product_meta = array();
 
