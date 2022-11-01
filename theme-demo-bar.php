@@ -12,6 +12,11 @@
  * @package         Theme_Demo_Bar
  */
 
+// Load Dependencies
+require_once __DIR__ . '/feature-plugins/class-headstart-generate-annotation-atomic.php';
+require_once __DIR__ . '/feature-plugins/class-headstart-generate-annotation-simple.php';
+require_once __DIR__ . '/feature-plugins/class-headstart-generate-annotation-page.php';
+
 /**
  * Class Theme_Demo_Sites_Display
  */
