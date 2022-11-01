@@ -106,7 +106,7 @@ class Headstart_Annotation_Generator_Simple {
 	 * @return array  Posts.
 	 */
 	private static function get_pages_and_posts( $excluded_post_types = [] ) {
-		$post_types = [ 'page', 'post', 'jetpack-portfolio', 'jetpack-testimonial', 'wp_block' ];
+		$post_types = [ 'page', 'post', 'jetpack-portfolio', 'jetpack-testimonial', 'wp_block', 'product' ];
 
 		if ( ! empty( $excluded_post_types ) ) {
 			$post_types = array_diff( $post_types, $excluded_post_types );
