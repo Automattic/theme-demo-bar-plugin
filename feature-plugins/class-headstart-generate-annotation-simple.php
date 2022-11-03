@@ -12,10 +12,11 @@
 /**
  * !!! SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC !!!
  * -----------------------------------------------------------------------
- *   All changes to this file must be updated on both WPCOM and WPCOMSH.
+ *   All changes to this file must be updated on both WPCOM and theme-demo-bar-plugin.
  *   The file should be identical on the two codebases.
- *   WPCOM:   wp-content/lib/headstart/class-headstart-generate-annotation-simple.php
- *   WPCOMSH: wpcom-headstart/class-headstart-generate-annotation-simple.php
+ *   WPCOM:           wp-content/lib/headstart/class-headstart-generate-annotation-simple.php
+ *   Demo Bar Plugin: feature-plugins/class-headstart-generate-annotation-simple.php
+ *   See: https://github.com/Automattic/theme-demo-bar-plugin
  * -----------------------------------------------------------------------
  * !!! SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC SYNC !!!
  **/
