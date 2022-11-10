@@ -4,8 +4,8 @@
 
 This plugin:
 
-- Adds the demo bar on atomic theme demo sites.
-- Provides a page in wp-admin that generates a headstart annotation on atomic sites.
+- Adds the **demo bar** on **atomic theme demo sites**.
+- Adds a page in wp-admin that **generates a headstart annotation** on atomic sites.
 
 ## Installation
 
