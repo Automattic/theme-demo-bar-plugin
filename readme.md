@@ -1,10 +1,13 @@
-Adds the demo bar on atomic theme demo sites.
+# theme-demo-bar-plugin
 
-### Description
+## Description
 
-This plugin adds the demo bar on atomic theme demo site.
+This plugin:
 
-### Installation
+- Adds the **demo bar** on **atomic theme demo sites**.
+- Adds a page in wp-admin that **generates a headstart annotation** on atomic sites.
+
+## Installation
 
 This section describes how to install the plugin and get it working.
 
@@ -12,5 +15,12 @@ This section describes how to install the plugin and get it working.
 2. Upload the ZIP file to your demo site.
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
-### Screenshots
-<img width="1511" alt="Screen Shot 2022-10-06 at 14 36 12" src="https://user-images.githubusercontent.com/1234758/194381112-b6b62bff-fc97-4356-a234-c0bfb733158a.png">
+## Screenshots
+
+Demo Bar
+
+![Example Demo Bar](screenshots/example-demo-bar.png?raw=true)
+
+Headstart
+
+![Example Headstart Annotation Generator](screenshots/example-headstart-annotation.png?raw=true)
