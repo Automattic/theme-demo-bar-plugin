@@ -7,7 +7,7 @@
  * Author URI:      https://github.com/Automattic/theme-demo-bar-plugin
  * Text Domain:     theme-demo-bar
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         0.2.0
  *
  * @package         Theme_Demo_Bar
  */
