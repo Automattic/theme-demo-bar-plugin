@@ -3,7 +3,7 @@
  * Plugin Name:     Theme Demo Bar
  * Plugin URI:      https://github.com/Automattic/theme-demo-bar-plugin
  * Description:     Adds the demo bar on atomic theme demo sites.
- * Author:          Valter Lorran
+ * Author:          Automattic
  * Author URI:      https://github.com/Automattic/theme-demo-bar-plugin
  * Text Domain:     theme-demo-bar
  * Domain Path:     /languages
