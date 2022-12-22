@@ -3,7 +3,7 @@
  * Plugin Name:     Theme Demo Bar
  * Plugin URI:      https://github.com/Automattic/theme-demo-bar-plugin
  * Description:     Adds the demo bar on atomic theme demo sites.
- * Author:          Valter Lorran
+ * Author:          Automattic
  * Author URI:      https://github.com/Automattic/theme-demo-bar-plugin
  * Text Domain:     theme-demo-bar
  * Domain Path:     /languages
@@ -269,12 +269,18 @@ class Theme_Demo_Sites_Display {
 		<div id="demosite-activate-wrap" class="demosite-activate">
 
 			<header class="demosite-header">
+				<span class="demosite-activate-logo">
+					<?php $this->render_wordpress_logo(); ?>
+				</span>
 				<p class="demosite-tagline"><?php echo esc_html( $title ); ?></p>
 				<a class="demosite-activate-trigger" href="<?php echo esc_url( $url ); ?>">
 					<?php
 						echo $tab_text; //phpcs:ignore
 						echo $theme_price; //phpcs:ignore
 					?>
+				</a>
+				<a class="demosite-activate-cta-arrow" href="<?php echo esc_url( $url ); ?>">
+					<?php $this->render_cta_arrow(); ?>
 				</a>
 			</header>
 		</div><!-- #demosite-activate-wrap -->
@@ -357,6 +363,26 @@ class Theme_Demo_Sites_Display {
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Renders the WordPress logo
+	 */
+	protected function render_wordpress_logo() {
+		?>
+		<svg width="36" height="36" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M23 12C23 5.388 17.8365 0 11.5 0C5.152 0 0 5.388 0 12C0 18.624 5.152 24 11.5 24C17.8365 24 23 18.624 23 12ZM8.947 18.444L5.0255 7.464C5.658 7.44 6.371 7.368 6.371 7.368C6.946 7.296 6.877 6.012 6.302 6.036C6.302 6.036 4.6345 6.168 3.5765 6.168C3.3695 6.168 3.151 6.168 2.9095 6.156C4.738 3.228 7.9005 1.332 11.5 1.332C14.1795 1.332 16.6175 2.376 18.4575 4.14C17.6755 4.008 16.56 4.608 16.56 6.036C16.56 6.81358 16.9568 7.48075 17.403 8.23087L17.4031 8.23106L17.4033 8.23138L17.4035 8.23171C17.4666 8.33796 17.5308 8.44587 17.595 8.556C17.9975 9.288 18.2275 10.188 18.2275 11.508C18.2275 13.296 16.6175 17.508 16.6175 17.508L13.133 7.464C13.754 7.44 14.076 7.26 14.076 7.26C14.651 7.2 14.582 5.76 14.007 5.796C14.007 5.796 12.351 5.94 11.27 5.94C10.2695 5.94 8.5905 5.796 8.5905 5.796C8.0155 5.76 7.9465 7.236 8.5215 7.26L9.5795 7.356L11.0285 11.448L8.947 18.444ZM20.0466 11.9303L20.0215 12C19.1882 14.2893 18.3611 16.5983 17.5357 18.9027L17.5349 18.9048L17.5311 18.9153C17.2418 19.7231 16.9527 20.5304 16.6635 21.336C19.734 19.488 21.7235 15.948 21.7235 12C21.7235 10.152 21.321 8.448 20.516 6.9C20.862 9.67188 20.3306 11.1439 20.0466 11.9303ZM7.015 21.708C3.588 19.98 1.2765 16.236 1.2765 12C1.2765 10.44 1.541 9.024 2.1045 7.692C2.44894 8.6766 2.79338 9.66174 3.13793 10.6472C4.4269 14.3337 5.71737 18.0246 7.015 21.708ZM14.6165 22.128L11.6495 13.752C11.1028 15.4348 10.5521 17.1175 9.99975 18.8053C9.62251 19.958 9.24451 21.113 8.8665 22.272C9.6945 22.536 10.5915 22.668 11.5 22.668C12.5925 22.668 13.6275 22.476 14.6165 22.128Z"/>
+		</svg>
+		<?php
+	}
+
+	/**
+	 * Renders the CTA arrow for mobile device
+	 */
+	protected function render_cta_arrow() {
+		?>
+		<svg width="24" height="20" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H11M11 5L6.5 0.5M11 5L6.5 9.5"/></svg>
+		<?php
 	}
 }
 
