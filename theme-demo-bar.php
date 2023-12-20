@@ -188,16 +188,6 @@ class Theme_Demo_Sites_Display {
 	}
 
 	/**
-	 * Get the premium theme slug
-	 *
-	 * @param string $stylesheet stylesheet slug
-	 * @return string
-	 */
-	private function get_theme_slug( $stylesheet ) {
-		return "premium/{$stylesheet}";
-	}
-
-	/**
 	 * Check if the theme is premium for a given stylesheet
 	 *
 	 * @param string $stylesheet stylesheet slug
@@ -238,11 +228,10 @@ class Theme_Demo_Sites_Display {
 		// 'theme' and 'demo-blog'
 		$url = add_query_arg(
 			array(
-				'theme'   => rawurlencode( $this->get_theme_slug( $theme->stylesheet ) ),
 				'premium' => $this->is_premium_theme( $theme->stylesheet ) ? 'true' : false,
 				'ref'     => 'demo-blog',
 			),
-			'https://wordpress.com/start/with-theme'
+			'https://wordpress.com/theme/' . rawurlencode( $theme->stylesheet )
 		);
 
 		$title    = __( 'Start your WordPress.com site with this theme.' );
