@@ -193,18 +193,3 @@ body.demo-site {
 		position: absolute;
 	}
 }
-
-body.demo-site.logged-in {
-	margin-top: 112px !important;
-}
-
-@media screen and (max-width: 782px ) {
-	body.demo-site.logged-in {
-		margin-top: 126px !important;
-	}
-}
-/* @media screen and (max-width: 620px) {
-	body.demo-site.logged-in {
-		margin-top: 146px !important;
-	}
-} */
